@@ -1,15 +1,14 @@
 # Author: Roger Bukuru
-# Date: 25 July 2019 22:00:00
 # Execute estimators on the given data sample
 
-############################### Estimators on any data sample example ##########################################
+
+# Allows one to indicate if only a certain of the period of the data should be analysed, the period types includes the following:
+# Last week of a month data sample
+# Last day of a month sample
+# Last houe of a month sample
+# Frequency units includes day, week or hour
 
 get_estimated_correlations = function(asset_data, frequency=1, frequency_unit="day", select_period=FALSE){
-  # Allows one to indicate if only a certain of the period of the data should be analysed, the period types includes the following:
-  # Last week of a month data sample
-  # Last day of a month sample
-  # Last houe of a month sample
-  # Frequency units includes day, week or hour
   period_data = asset_data
   if(select_period){
     period_data = extract_data_last_period(asset_data,frequency,frequency_unit) 

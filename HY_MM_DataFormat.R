@@ -1,3 +1,6 @@
+# Author: Roger Bukuru
+# Script to clean data into MM and HY data format  i.e into prices and times matrix 
+
 require(pacman)
 p_load(viridis,tidyverse,knitr)
 

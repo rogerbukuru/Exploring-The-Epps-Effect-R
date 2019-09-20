@@ -1,7 +1,8 @@
 # Author: Roger Bukuru
-# Date: 03 August 2019 14:51:55
+
+
 rm(list = ls())
-###################################################### Install Packages ########################################
+#------------------------------------------------ Install Packages --------------------------------------------#
 list.of.packages <- c(
   "tidyverse", "Rcpp","RcppArmadillo",
   "pracma","DescTools","matlab",
@@ -10,24 +11,22 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 require(pacman)
 p_load(tidyverse,doParallel,tictoc,Rcpp,RcppArmadillo)
-################################################################################################################
+#--------------------------------------------------------------------------------------------------------------#
 
-############################################ Load All Necessary Files #########################################
-# Load Data First a
+
+#------------------------------------ Load All Necessary Files ------------------------------------------------#
 source("LoadData.R")
-# Load Asynchronous Data Processing Script to create cleaned asynchronous data samples
 source("Data Creation Algorithms/AsynchronousData.R")
-# Load Synchronous Data Processing Script to create cleaned syncrhonous data samples
 source("Data Creation Algorithms/SynchronousData.R")
-# Load Malavian Mancino(MM) and Hayashi Yoshida(HY) Script
+source("Data Creation Algorithms/DermanFrameworkVolumeBuckets.R")
+source("Data Creation Algorithms/LiningUpEventsVolumeBuckets.R")
 source("Estimators/ftcorr-RealData.R")
 source("Estimators/ftcorr-MultiAsset.R")
-# Load script to clean data into MM and HY data format  i.e into prices and times matrix 
 source("HY_MM_DataFormat.R")
-source()
-###############################################################################################################
 
-# Data Science 
+#--------------------------------------------------------------------------------------------------------------
+
+
 # auxilary function to get various periods of the sampled data
 # includes last week
 # last day
@@ -119,13 +118,14 @@ generate_data = function(asyncData=TRUE, syncData=FALSE, volumeBucket=FALSE, der
 
 }
 
+# Data is automatically written to an excel file 
+# Frequency can be any finite number typically 1 should be fine
+# Frequency units includes the following: secs, mins, hours, days, weeks
+# If price is true prices are returned
+# If volume is true volumes are returned both cannot be true
 
 create_async_data = function (starting_month,frequency=1, frequency_unit="weeks", price=TRUE,volumes=FALSE){
-  # Data is automatically written to an excel file 
-  # Frequency can be any number from 1-n
-  # Frequency units includes the following: secs, mins, hours, days, weeks
-  # If price is true prices are returned
-  # If volume is true volumes are returned both cannot be true
+ 
   if(price & volumes){
     return(stop("Either price or volumes should be selected not both"))
   }
@@ -134,18 +134,27 @@ create_async_data = function (starting_month,frequency=1, frequency_unit="weeks"
  
 }
 
+
+# Data is automatically written to an excel file 
+# Frequency can be any finite number typically 1 should be fine
+# Frequency units includes the following: secs, mins, hours, days, weeks
+# Bar frequency along with the Bar Frequency Units indicates the frequency of the bars i.e the default setting is 1 min bars for a 1 week sample
+
 create_sync_data = function(starting_month,frequency=1, frequency_unit="weeks", bar_frequency=1,bar_frequency_units="mins", vwap=FALSE) {
-  
-  # Data is automatically written to an excel file 
-  # Frequency can be any number from 1-n
-  # Frequency units includes the following: secs, mins, hours, days, weeks
-  # Bar frequency along with the Bar Frequency Units indicates the frequency of the bars i.e the default setting is 1 min bars for a 1 week sample
   bar_data_sample = create_bar_data(tickers,starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units, vwap=TRUE)
   #period_data = bar_data_sample$vwap_bar_data
   return(bar_data_sample)
 }
 
+
+
+# Frequency can be any finite number typically 1 should be fine
+# Frequency units includes the following: secs, mins, hours, days, weeks
+# Bucket frequency should be provided e.g 8 48, 480
+# Derman Framework used by default, set to False to use Lining Up Events
+
 create_volume_buckets = function(starting_month,frequency=1, frequency_unit="weeks",bucket_freq=480, dermanFramework=TRUE) {
+  
   stock_prices = create_data_sample(bar_last_week,frequency,frequency_unit,prices=TRUE,volume=FALSE)
   stock_volumes =create_data_sample(bar_last_week,frequency,frequency_unit,prices=TRUE,volume=TRUE)
   if(dermanFramework){
@@ -154,6 +163,7 @@ create_volume_buckets = function(starting_month,frequency=1, frequency_unit="wee
   }
   volume_bucket_data = create_volume_bucket_lining_up_events(tickers,bucket_freq,stock_prices,stock_volumes)
   return(volume_bucket_data)
+  
 }
 
 

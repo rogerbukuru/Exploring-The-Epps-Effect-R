@@ -1,5 +1,4 @@
 # Author: Roger Bukuru
-# Date: 25 August 2019 12:30:00
 # Implementation of the Lining Up Events to create event time volume buckets
  
 

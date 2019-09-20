@@ -1,5 +1,4 @@
 # Author: Roger Bukuru
-# Date: 20 August 2019 14:00:00
 # Implementation of the Derman Framework to create event time volume buckets
 
 

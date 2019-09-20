@@ -1,6 +1,6 @@
 # Author: Roger Bukuru
-# Date: 16 July 2019 22:00:00
 # This script generates asynchronous data after the data has been aggregated to remove repeated simulataneous trades
+
 require(pacman)
 p_load(tidyverse,knitr,openxlsx)
 
