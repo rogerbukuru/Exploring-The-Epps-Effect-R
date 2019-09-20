@@ -46,7 +46,9 @@ aggregate_data = function(ticker_data){
   
   return(aggreagted_ticker_data)
 }
+#---------------------------------------------------------------------------------------------------------------
 
+# remove overnight trades
 remove_overnight_trades  = function(ticker_data){
   
   ticker_length = nrow(ticker_data)
@@ -62,6 +64,8 @@ remove_overnight_trades  = function(ticker_data){
   trading_day_data = do.call("rbind",trading_day_data)
   return(trading_day_data)
 }
+#---------------------------------------------------------------------------------------------------------------
+
 
 convert_prices_to_returns = function(ticker_data){
   #ticker_data$times = as.POSIXct(ticker_data[,1], format="%Y-%m-%d %H:%M:%OS")
@@ -91,7 +95,7 @@ convert_prices_to_returns = function(ticker_data){
   return(trading_day_data)
   
 }
-
+#--------------------------------------------------------------------------------------------------------------
 
 # matched indexes with period
 get_matching_indexes = function(stocks_times,period){
@@ -99,6 +103,7 @@ get_matching_indexes = function(stocks_times,period){
   return(which(period==stocks_times))
   
 }
+#--------------------------------------------------------------------------------------------------------------
 
 create_data_sample = function(tickers, start_date,frequency=1, frequency_units="weeks", prices=FALSE, volumes=FALSE){
   

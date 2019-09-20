@@ -10,6 +10,7 @@ expand_volume_over_price = function(stock_data,ticker_name){
   )
   return(expanded_data)
 }
+#---------------------------------------------------------------------------------------------------------------
 
 get_bucket_data = function(stock_data,volume_bucket_size){
   bucket_size = 0 
@@ -32,6 +33,7 @@ get_bucket_data = function(stock_data,volume_bucket_size){
   data = list(vwap=vwap,final_volume=final_volume, stock_data=stock_data)
   return(data)
 }
+#---------------------------------------------------------------------------------------------------------------
 
 create_volume_data = function(volume_data, price_data,volume_bucket_size,tickers, day_number){
   ticker_volume_data = volume_data[1,]
@@ -92,6 +94,7 @@ create_volume_data = function(volume_data, price_data,volume_bucket_size,tickers
   return(data)
 }
 
+#---------------------------------------------------------------------------------------------------------------
 
 get_remaining_buckets = function(volume_data,volume_sizes,ticker_volume_data,volume_bucket_size){
   
@@ -133,6 +136,7 @@ get_remaining_buckets = function(volume_data,volume_sizes,ticker_volume_data,vol
   return(data)
 }
 
+#---------------------------------------------------------------------------------------------------------------
 
 create_volume_bucket_lining_up_events = function(tickers,bucket_freq,stock_prices,stock_volumes){
   
