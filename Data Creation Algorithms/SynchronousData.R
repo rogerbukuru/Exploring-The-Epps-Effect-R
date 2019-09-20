@@ -47,7 +47,7 @@ create_bar_data = function(tickers,start_date,frequency, frequency_units, bar_fr
   return(data) 
   
 }
-
+#-----------------------------------------------------------------------------------------------------------
 
 bar_data = function(ticker_data,bar_period){
   

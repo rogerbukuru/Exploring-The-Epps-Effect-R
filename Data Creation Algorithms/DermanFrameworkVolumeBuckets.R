@@ -20,7 +20,7 @@ expand_ticker_volumes = function(tickers,stock_volumes,stock_prices){
   return(volumes_expanded)
 }
 
-
+#---------------------------------------------------------------------------------------------------------------
 
 
 derman_volume_buckets = function(stock_data,total_buckets,volume_bucket_size,ticker){
@@ -43,7 +43,7 @@ derman_volume_buckets = function(stock_data,total_buckets,volume_bucket_size,tic
 }
 
 
-
+#--------------------------------------------------------------------------------------------------------------
 
 create_derman_volume_buckets = function(tickers, bucket_freq,stock_prices,stock_volumes){
   
