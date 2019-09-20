@@ -16,12 +16,12 @@ p_load(tidyverse,doParallel,tictoc,Rcpp,RcppArmadillo)
 # Load Data First a
 source("LoadData.R")
 # Load Asynchronous Data Processing Script to create cleaned asynchronous data samples
-source("AsynchronousData.R")
+source("Data Creation Algorithms/AsynchronousData.R")
 # Load Synchronous Data Processing Script to create cleaned syncrhonous data samples
-source("SynchronousData.R")
+source("Data Creation Algorithms/SynchronousData.R")
 # Load Malavian Mancino(MM) and Hayashi Yoshida(HY) Script
-source("Code/ftcorr-014-parallelRcpp-realdata.R")
-source("Code/ftcorr-multi-asset.R")
+source("Estimators/ftcorr-RealData.R")
+source("Estimators/ftcorr-MultiAsset.R")
 # Load script to clean data into MM and HY data format  i.e into prices and times matrix 
 source("HY_MM_DataFormat.R")
 source()
