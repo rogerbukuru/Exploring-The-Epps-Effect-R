@@ -74,8 +74,10 @@ convert_prices_to_returns = function(ticker_data){
   trading_days  = seq.POSIXt(ticker_data[1,"times"], end_day, by="day",format = "%Y-%m-%d %H:%M:%OS")
   first_day = trading_days[1]
   trading_day_data = lapply(trading_days, function(trading_day){
-    
     trading_day_data  = ticker_data%>%filter(grepl(as.Date(trading_day,"UTC"),times))
+    # Uncomment these lines to remove first 10 minutes
+    #clean_up_infra = as.POSIXct(paste(as.Date(trading_day,"UTC"),"07:09:59"), tz="UTC",origin="1970-01-01")
+    #trading_day_data  = trading_day_data%>%filter(times>clean_up_infra)
     if(nrow(trading_day_data)>0){
       stock_returns = diff(log(trading_day_data[,"value"]))
       
@@ -157,7 +159,7 @@ create_data_sample = function(tickers, start_date,frequency=1, frequency_units="
   
   
   stocks = combine_words(unlist(tickers), sep="",and="", after="_")
-  write.csv2(aggregated_merged_data,file=paste0("Cleaned Data/Asynchronous Data/",stocks,start_date,"-",end_date,"Prices",".csv"), row.names = FALSE)
+  #write.csv2(aggregated_merged_data,file=paste0("Cleaned Data/Asynchronous Data/",stocks,start_date,"-"#,end_date,"Prices",".csv"), row.names = FALSE)
   
   return(aggregated_merged_data)
   

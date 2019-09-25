@@ -15,7 +15,7 @@ p_load(tidyverse,doParallel,tictoc,Rcpp,RcppArmadillo)
 
 
 #------------------------------------ Load All Necessary Files ------------------------------------------------#
-source("LoadData.R")
+source("LoadTradeData.R")
 source("Data Creation Algorithms/AsynchronousData.R")
 source("Data Creation Algorithms/SynchronousData.R")
 source("Data Creation Algorithms/DermanFrameworkVolumeBuckets.R")
