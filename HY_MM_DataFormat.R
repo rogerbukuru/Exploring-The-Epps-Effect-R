@@ -29,9 +29,9 @@ HYMMDataSets = function(stock_asset_data, tickers,start_date,end_date){
   colnames(t) = c(paste(tickers,"Date"))
   stocks = combine_words(unlist(tickers), sep="", and="", after="_")
 
-  write.csv(p,file=paste0("Cleaned Data/Asynchronous Data/HY_MM Formats/","Prices",stocks,start_date,"-",end_date,".csv"), row.names = FALSE)
+  #write.csv(p,file=paste0("Cleaned Data/Asynchronous Data/HY_MM Formats/","Prices",stocks,start_date,"-",end_date,".csv"), row.names = FALSE)
    
-  write.csv(t,file=paste0("Cleaned Data/Asynchronous Data/HY_MM Formats/","Times",stocks,start_date,"-",end_date,".csv"), row.names = FALSE)
+  #write.csv(t,file=paste0("Cleaned Data/Asynchronous Data/HY_MM Formats/","Times",stocks,start_date,"-",end_date,".csv"), row.names = FALSE)
   data = list(p=p,t=t)
   return(data)
 

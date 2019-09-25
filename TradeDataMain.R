@@ -92,7 +92,18 @@ init_env = function(tickers= c("BTI","NPN")){
 
 
 
-generate_data = function(asyncData=TRUE, syncData=FALSE, volumeBucket=FALSE, dermanFramework=TRUE,starting_month,frequency=1,frequency_unit="weeks",asyncPrice=TRUE, asyncVolume=FALSE,bar_frequency=1, bar_frequency_units="mins", vwap=FALSE){
+generate_data = function(asyncData=TRUE,
+                         syncData=FALSE, 
+                         volumeBucket=FALSE,
+                         dermanFramework=TRUE,
+                         starting_month,
+                         frequency=1,
+                         frequency_unit="weeks",
+                         asyncPrice=TRUE,
+                         asyncVolume=FALSE,
+                         bar_frequency=1, 
+                         bar_frequency_units="mins",
+                         vwap=FALSE){
   
   if((asyncData & syncData & volumeBucket)
      ||(asyncData & syncData)
@@ -108,7 +119,7 @@ generate_data = function(asyncData=TRUE, syncData=FALSE, volumeBucket=FALSE, der
     }
     
     if(syncData){
-      return(create_sync_data (starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units,vwap=FALSE))
+      return(create_sync_data (starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units,vwap=vwap))
     }
     
     if(volumeBucket){
@@ -141,7 +152,7 @@ create_async_data = function (starting_month,frequency=1, frequency_unit="weeks"
 # Bar frequency along with the Bar Frequency Units indicates the frequency of the bars i.e the default setting is 1 min bars for a 1 week sample
 
 create_sync_data = function(starting_month,frequency=1, frequency_unit="weeks", bar_frequency=1,bar_frequency_units="mins", vwap=FALSE) {
-  bar_data_sample = create_bar_data(tickers,starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units, vwap=TRUE)
+  bar_data_sample = create_bar_data(tickers,starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units, vwap=vwap)
   #period_data = bar_data_sample$vwap_bar_data
   return(bar_data_sample)
 }
