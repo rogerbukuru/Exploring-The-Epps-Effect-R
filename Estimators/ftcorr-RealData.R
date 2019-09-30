@@ -108,12 +108,12 @@ ftcorr_supp = function(p, t, fourierMethod, onlyOverlapping) {
                      
                      # create complex exponential coefficients, multiply with
                      # log-price differences
-                     for (i in 1:length(K)) {
-                       e_t_dp.PosComplexExpDiffPrice[i, ] = ComplexExp(P, Time, K[j])
+                     for (j in 1:length(K)) {
+                       e_t_dp.PosComplexExpDiffPrice[i, j] = ComplexExp(P, Time, K[j])
                      }
                      
-                     for (i in 1:length(K)) {
-                       e_t_dp.NegComplexExpDiffPrice[i, ] = ComplexExp(P, -Time, K[j])
+                     for (j in 1:length(K)) {
+                       e_t_dp.NegComplexExpDiffPrice[i, j] = ComplexExp(P, -Time, K[j])
                      }
                    }
                    Sigma = matrix(NA, mp, mp)

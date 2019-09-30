@@ -73,16 +73,26 @@ convert_prices_to_returns = function(ticker_data){
   end_day = ticker_data[ticker_length,"times"]+ as.difftime(1,units = "days")
   trading_days  = seq.POSIXt(ticker_data[1,"times"], end_day, by="day",format = "%Y-%m-%d %H:%M:%OS")
   first_day = trading_days[1]
+  
   trading_day_data = lapply(trading_days, function(trading_day){
     trading_day_data  = ticker_data%>%filter(grepl(as.Date(trading_day,"UTC"),times))
     # Uncomment these lines to remove first 10 minutes
     #clean_up_infra = as.POSIXct(paste(as.Date(trading_day,"UTC"),"07:09:59"), tz="UTC",origin="1970-01-01")
     #trading_day_data  = trading_day_data%>%filter(times>clean_up_infra)
+   
     if(nrow(trading_day_data)>0){
-      stock_returns = diff(log(trading_day_data[,"value"]))
+      stock_returns = diff(log(trading_day_data[,"value"])) # issue 
+      # x = trading_day_data[,-1]
+      # #print(x)
+      # stock_returns = matrix(NA, dim(x)[1], dim(x)[2])
+      # for (i in 1:ncol(x)) {
+      #   ind = x[!is.na(x)[,i],i]
+      #   R = diff(log(x[ind,i]))
+      #   stock_returns[ind[-1],i] = R
+      # }
       
       if(first_day==trading_day_data[1,"times"]){
-        stock_returns = c(0, stock_returns)
+        stock_returns = c(0, stock_returns) 
       }else{
         stock_returns = c(NaN, stock_returns)
       }

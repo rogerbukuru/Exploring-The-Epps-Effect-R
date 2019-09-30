@@ -9,6 +9,7 @@
 # Frequency units includes day, week or hour
 
 get_estimated_correlations = function(asset_data, frequency=1, frequency_unit="day", select_period=FALSE){
+  
   period_data = asset_data
   if(select_period){
     period_data = extract_data_last_period(asset_data,frequency,frequency_unit) 
@@ -25,5 +26,3 @@ get_estimated_correlations = function(asset_data, frequency=1, frequency_unit="d
   saveRDS(result,"HYMMData.RData")
   return(result)
 }
-
-

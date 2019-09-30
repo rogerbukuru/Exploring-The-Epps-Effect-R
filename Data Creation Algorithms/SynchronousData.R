@@ -4,17 +4,21 @@
 require(pacman)
 p_load(tidyverse)
 
-create_bar_data = function(tickers,start_date,frequency, frequency_units, bar_frequency,bar_frequency_units,vwap=FALSE){
+create_bar_data = function(tickers,start_date,frequency, frequency_units, bar_frequency,bar_frequency_units,vwap=FALSE,prices){
   # period of data
   end_date = start_date+as.difftime(frequency,units =frequency_units)
   #bar period i.e 1 week, 5min etc
   bar_period = seq.POSIXt(from = start_date, to=end_date, by=paste(bar_frequency,bar_frequency_units))
-  field = NULL
+  field = "close"
   if(vwap){
     field = "vwap"
-  }else{
-    field = "close"
   }
+  
+  field2 = "value"
+  if(!prices){
+    field2 = "stock_returns"
+  }
+
   
   aggregated_stock_data= lapply(tickers, function(ticker){
     aggregated_stock = stock_data_stream[[ticker]]%>%filter(condcode=="AT")%>%
@@ -23,15 +27,25 @@ create_bar_data = function(tickers,start_date,frequency, frequency_units, bar_fr
       convert_prices_to_returns()
     return(data.frame(aggregated_stock))
   })
-  stock_bar_data = lapply(aggregated_stock_data,bar_data,bar_period)
-  vwap_bar_data = lapply(stock_bar_data, function(bar_data){
+  stock_bar_data = lapply(aggregated_stock_data,bar_data,bar_period,prices)
+  # calculate returns
+  stock_returns = lapply(stock_bar_data, function(raw_bar_data){
+    stock_data = raw_bar_data[,c("times",field)]
+    colnames(stock_data) = c("times","value")
+    ticker_returns = stock_data%>%convert_prices_to_returns()
+    #print(stock_returns)
+    #raw_bar_data[,field] = stock_returns
+    return(ticker_returns)
+  })
+
+  vwap_bar_data = lapply(stock_returns, function(bar_data){
     matched_indexes = sapply(as.numeric(bar_data[,"times"]),get_matching_indexes,bar_period)
     new_bar_data = data.frame(Date=  as.POSIXct(bar_period, origin="1970-01-01", tz="UCT"),
                               vwap = vector(mode = "numeric",length(bar_period)))
-    colnames(new_bar_data) = c("Date",field)
-    new_bar_data[matched_indexes,2]  = bar_data[,field]
+    colnames(new_bar_data) = c("Date",field2)
+    new_bar_data[matched_indexes,2]  = bar_data[,field2]
     new_bar_data[-matched_indexes,2] = NaN
-    return(new_bar_data[,field])
+    return(new_bar_data[,field2])
   })
   names(stock_bar_data) = tickers
   names(vwap_bar_data) = tickers
@@ -43,14 +57,13 @@ create_bar_data = function(tickers,start_date,frequency, frequency_units, bar_fr
   na_only_rows = which(rowSums(is.na(joined_vwap_stock_bar_data))==length(tickers)) # NA on all columns
   joined_vwap_stock_bar_data = joined_vwap_stock_bar_data[-na_only_rows,] # remove NA's 
   
-  data = list(stock_bar_data=stock_bar_data,vwap_bar_data = joined_vwap_stock_bar_data)
+  data = list(stock_bar_data=stock_bar_data,bar_data = joined_vwap_stock_bar_data)
   return(data) 
   
 }
 #-----------------------------------------------------------------------------------------------------------
 
-bar_data = function(ticker_data,bar_period){
-  
+bar_data = function(ticker_data,bar_period, prices){
   bar_data = data.frame(
     times=bar_period[1], 
     open=vector(mode = "numeric",1),
@@ -79,9 +92,9 @@ bar_data = function(ticker_data,bar_period){
       }else{
         open = bar_data[pos-1,"close"] # previous closing price
       }
-      high = max(stock_data[,"stock_returns"])
-      low =  min(stock_data[,"stock_returns"])
-      close = stock_data[nrow(stock_data),"stock_returns"]
+      high = max(stock_data[,"value"])
+      low =  min(stock_data[,"value"])
+      close = stock_data[nrow(stock_data),"value"]
       volume = sum(stock_data[,"size"])
       bar_data[pos,"times"]   = bar_period[i]
       bar_data[pos,"open"]    = open
@@ -89,7 +102,7 @@ bar_data = function(ticker_data,bar_period){
       bar_data[pos,"low"]     = low
       bar_data[pos,"close"]   = close
       bar_data[pos,"volume"]  = volume
-      bar_data[pos,"vwap"]     = sum(stock_data[,"stock_returns"]*stock_data[,"size"])/volume
+      bar_data[pos,"vwap"]     = sum(stock_data[,"value"]*stock_data[,"size"])/volume
       pos = pos+1
       
     }

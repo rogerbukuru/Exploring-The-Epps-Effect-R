@@ -87,6 +87,7 @@ init_env = function(tickers= c("BTI","NPN")){
   starting_months = seq.POSIXt(starting_date,ending_date,by="month", format = "%Y-%m-%d %H:%M:%OS")
   tickers <<- tickers
   starting_months <<- starting_months
+  
 }
 
 
@@ -103,6 +104,7 @@ generate_data = function(asyncData=TRUE,
                          asyncVolume=FALSE,
                          bar_frequency=1, 
                          bar_frequency_units="mins",
+                         bucket_frequency = 480,
                          vwap=FALSE){
   
   if((asyncData & syncData & volumeBucket)
@@ -114,16 +116,16 @@ generate_data = function(asyncData=TRUE,
   }else{
     
     if(asyncData){
-
+  
       return(create_async_data(starting_month,frequency,frequency_unit,asyncPrice,asyncVolume))
     }
     
     if(syncData){
-      return(create_sync_data (starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units,vwap=vwap))
+      return(create_sync_data (starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units,vwap,asyncPrice))
     }
     
     if(volumeBucket){
-      
+      return(create_volume_buckets(starting_month,frequency, frequency_unit,bucket_frequency,dermanFramework))
     }
   }
 
@@ -135,12 +137,12 @@ generate_data = function(asyncData=TRUE,
 # If price is true prices are returned
 # If volume is true volumes are returned both cannot be true
 
-create_async_data = function (starting_month,frequency=1, frequency_unit="weeks", price=TRUE,volumes=FALSE){
+create_async_data = function (starting_month,frequency, frequency_unit,price,volumes){
  
   if(price & volumes){
     return(stop("Either price or volumes should be selected not both"))
   }
-  data_sample = create_data_sample(tickers,starting_month,frequency,frequency_unit,prices=TRUE,volumes=FALSE)
+  data_sample = create_data_sample(tickers,starting_month,frequency,frequency_unit,price,volumes)
   return(data_sample)
  
 }
@@ -151,8 +153,8 @@ create_async_data = function (starting_month,frequency=1, frequency_unit="weeks"
 # Frequency units includes the following: secs, mins, hours, days, weeks
 # Bar frequency along with the Bar Frequency Units indicates the frequency of the bars i.e the default setting is 1 min bars for a 1 week sample
 
-create_sync_data = function(starting_month,frequency=1, frequency_unit="weeks", bar_frequency=1,bar_frequency_units="mins", vwap=FALSE) {
-  bar_data_sample = create_bar_data(tickers,starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units, vwap=vwap)
+create_sync_data = function(starting_month,frequency, frequency_unit, bar_frequency,bar_frequency_units, vwap,prices) {
+  bar_data_sample = create_bar_data(tickers,starting_month,frequency,frequency_unit,bar_frequency,bar_frequency_units, vwap, prices)
   #period_data = bar_data_sample$vwap_bar_data
   return(bar_data_sample)
 }
@@ -164,15 +166,15 @@ create_sync_data = function(starting_month,frequency=1, frequency_unit="weeks", 
 # Bucket frequency should be provided e.g 8 48, 480
 # Derman Framework used by default, set to False to use Lining Up Events
 
-create_volume_buckets = function(starting_month,frequency=1, frequency_unit="weeks",bucket_freq=480, dermanFramework=TRUE) {
-  
-  stock_prices = create_data_sample(bar_last_week,frequency,frequency_unit,prices=TRUE,volume=FALSE)
-  stock_volumes =create_data_sample(bar_last_week,frequency,frequency_unit,prices=TRUE,volume=TRUE)
+create_volume_buckets = function(starting_month,frequency, frequency_unit,bucket_frequency, dermanFramework) {
+
+  stock_prices  = create_async_data(starting_month,frequency, frequency_unit,price=TRUE,volumes=FALSE)
+  stock_volumes = create_async_data(starting_month,frequency, frequency_unit,price=FALSE,volumes=TRUE)
   if(dermanFramework){
-    volume_bucket_data = create_derman_volume_buckets(tickers,bucket_freq,stock_prices,stock_volumes)
+    volume_bucket_data = create_derman_volume_buckets(tickers,bucket_frequency,stock_prices,stock_volumes)
     return(volume_bucket_data)
   }
-  volume_bucket_data = create_volume_bucket_lining_up_events(tickers,bucket_freq,stock_prices,stock_volumes)
+  volume_bucket_data = create_volume_bucket_lining_up_events(tickers,bucket_frequency,stock_prices,stock_volumes)
   return(volume_bucket_data)
   
 }

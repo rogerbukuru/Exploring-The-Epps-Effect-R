@@ -218,5 +218,5 @@ create_volume_bucket_lining_up_events = function(tickers,bucket_freq,stock_price
  final_volume_buckets = cbind(volume_ticks,final_volume_buckets)
  print("completed to create buckets...")
  data = list(volume_bucket_prices=volume_buckets , volume_bucket_returns = final_volume_buckets)
- return(volume_buckets)
+ return(data)
 }

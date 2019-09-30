@@ -40,9 +40,9 @@ source("Estimators/ftcorr-RealData.R")
 
 ftcorr = function(price, time, fourierMethod, onlyOverlapping){
   ## preallocate arrays and check data
-  np = dim(p)[1]
-  mp = dim(p)[2]
-  nt = dim(t)[1]
+  np = dim(price)[1]
+  mp = dim(price)[2]
+  nt = dim(time)[1]
   if (nt != np){
     stop("Incorrect Data")
   }
@@ -54,7 +54,7 @@ ftcorr = function(price, time, fourierMethod, onlyOverlapping){
       p = price[,c(i,j)]
       t = time[,c(i,j)]
       
-      sol = ftcorrgpu(p, t, fourierMethod, onlyOverlapping)
+      sol = ftcorr_supp(p, t, fourierMethod, onlyOverlapping)
       
       Sigma[i,j] = sol$Integrated_Covariance[1,2]
       Sigma[j,i] = sol$Integrated_Covariance[1,2]
