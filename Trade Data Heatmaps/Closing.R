@@ -8,15 +8,15 @@ library(reshape2)
 library("RColorBrewer")
 library(latex2exp)
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
-load("SynchronousDataHYMM1.RData")
-MM1MinSyncClose = MMSync
-HY1MinSyncClose = HYSync
-load("SynchronousDataHYMM2.RData")
-MM10MinSyncClose = MMSync
-HY10MinSyncClose = HYSync
-load("SynchronousDataHYMM3.RData")
-MM1HourSyncClose = MMSync
-HY1HourSyncClose = HYSync
+Onemin = readRDS("SynchronousDataHYMM1.RData")
+MM1MinSyncClose = Onemin[[1]]
+HY1MinSyncClose = Onemin[[2]]
+TenMin = readRDS("SynchronousDataHYMM2.RData")
+MM10MinSyncClose = TenMin[[1]]
+HY10MinSyncClose = TenMin[[2]]
+OneHour = readRDS("SynchronousDataHYMM3.RData")
+MM1HourSyncClose = OneHour[[1]]
+HY1HourSyncClose = OneHour[[2]]
 
 #--------------------------------------------------------------------------
 ## Malliavin Mancino
@@ -34,7 +34,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(a) MM 1 HR Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1411"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2829"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -63,7 +63,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(b) MM 10 Min Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0734"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2334"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -92,7 +92,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(c) MM 1 Min Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0379"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1384"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -122,7 +122,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(e) HY 1 HR Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1413"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2912"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -151,7 +151,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(f) HY 10 Min Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.08"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2347"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -180,7 +180,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(g) HY 1 Min Close Price")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0469"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1466"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),

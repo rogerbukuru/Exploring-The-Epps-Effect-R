@@ -6,7 +6,7 @@
 
 ## Source the file Simulations - for the functions to simulate the
 # various processes
-source("Simulation Algorithms/Simulations.R")
+source("Monte Carlo Simulation Algorithms/Simulations.R")
 
 #---------------------------------------------------------------------------
 
@@ -115,7 +115,7 @@ GarchA_QQ = ggplot(data.frame(qq = diff(log(GarchA_Price[,1]))), aes(sample = qq
 lay <- rbind(c(1,1,1,3,3),
              c(2,2,2,3,3))
 grid.arrange(GarchA_P, GarchA_R, GarchA_QQ, layout_matrix = lay,
-             top="GARCH (1,) - Andersen")
+             top="GARCH (1,1) - Andersen")
 
 ## Ornstein Uhlenbeck
 n = 500

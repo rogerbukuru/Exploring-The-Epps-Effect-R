@@ -8,7 +8,7 @@ library(ggplot2)
 library(latex2exp)
 library(svMisc)
 source("ftcorr.R")
-source("Simulation Algorithms/Simulations.R")
+source("Monte Carlo Simulation Algorithms/Simulations.R")
 
 #---------------------------------------------------------------------------
 ## case lambda = 0
