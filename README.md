@@ -24,7 +24,7 @@ and within the Intrinsic time framework the following formats of aggregated TAQ 
 
 The is no limitations to the sampling intervals i.e it could be 1 minute, 10 minutes, 1 hour, 1 day, 1 week etc.
 
-#### Generating Aggregated TAQ Data Example Usage
+#### Generating Calendar Time Aggregated TAQ Data Example Usage
 
 ```{.r}
 source("TradeDataMain.R")
@@ -60,7 +60,7 @@ vwap_1Min = generate_data(starting_month = starting_months[6],
 vwap_1Min = vwap_1Min$bar_data
 ```
 
-#### Generating Intrinsic Time Aggregated TAQ Data Example
+#### Generating Intrinsic Time Aggregated TAQ Data Example Usage
 
 ```{.r}
 
