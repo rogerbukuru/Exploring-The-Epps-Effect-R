@@ -76,3 +76,43 @@ vwap_1Hour = generate_data(starting_month = starting_months[6],
                               bar_frequency_units = "hours")
 
 vwap_1Hour = vwap_1Hour$bar_data
+
+#-------------------------------------------------------Derman Framework----------------------------------------
+
+derman_48_volume_bucket = generate_data(starting_month = starting_months[6], 
+                                         frequency=1,
+                                         frequency_unit = "weeks", 
+                                         asyncData = F,
+                                         volumeBucket = T,
+                                         bucket_frequency = 48)
+
+derman_480_volume_bucket = generate_data(starting_month = starting_months[6], 
+                                         frequency=1,
+                                         frequency_unit = "weeks", 
+                                         asyncData = F,
+                                         volumeBucket = T,
+                                         bucket_frequency = 480)
+
+#------------------------------------------------------- Lining Up Framework------------------------------------
+
+lue_48_volume_bucket = generate_data(starting_month = starting_months[6], 
+                                      frequency=1,
+                                      frequency_unit = "weeks", 
+                                      asyncData = F,
+                                      volumeBucket = T,
+                                      dermanFramework = F,
+                                      bucket_frequency = 48)
+
+final_lue_48_volume_bucket  = lue_48_volume_bucket$volume_bucket_returns
+
+lue_480_volume_bucket = generate_data(starting_month = starting_months[6], 
+                                         frequency=1,
+                                         frequency_unit = "weeks", 
+                                         asyncData = F,
+                                         volumeBucket = T,
+                                         dermanFramework = F,
+                                         bucket_frequency = 480)
+
+final_lue_480_volume_bucket  = lue_480_volume_bucket$volume_bucket_returns
+
+
