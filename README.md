@@ -24,7 +24,7 @@ and within the Intrinsic time framework the following formats of aggregated TAQ 
 
 The is no limitations to the sampling intervals i.e it could be 1 minute, 10 minutes, 1 hour, 1 day, 1 week etc.
 
-#### Generating Calendar Time Aggregated TAQ Data Example Usage
+### Generating Calendar Time Aggregated TAQ Data Example Usage
 
 ```{.r}
 source("TradeDataMain.R")
@@ -60,7 +60,7 @@ vwap_1Min = generate_data(starting_month = starting_months[6],
 vwap_1Min = vwap_1Min$bar_data
 ```
 
-#### Generating Intrinsic Time Aggregated TAQ Data Example Usage
+### Generating Intrinsic Time Aggregated TAQ Data Example Usage
 
 ```{.r}
 
@@ -89,4 +89,19 @@ final_lue_480_vb = lue_480_vb$volume_bucket_returns
 
 ```
 
+### Running Estimators on Aggregated Data
+
+```{.r}
+
+source("TradeDataMain.R")
+source("DataEstimatedCorrelations")
+tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
+init_env(tickers)
+
+correlation_estimators = get_estimated_correlations(aggreagted_data)
+
+MMEstimator = correlation_estimators[[1]]
+HYEstimator = correlation_estimators[[2]]
+
+```
 
