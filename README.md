@@ -60,6 +60,29 @@ vwap_1Min = generate_data(starting_month = starting_months[6],
 vwap_1Min = vwap_1Min$bar_data
 ```
 
+#### Generating Intrinsic Time Aggregated TAQ Data Example
 
+```{.r}
+
+#--------------------------------- Derman Framework --------------------------------------------
+derman_480_vb = generate_data(starting_month = starting_months[6], 
+                                         frequency=1,
+                                         frequency_unit = "weeks", 
+                                         asyncData = F,
+                                         volumeBucket = T,
+                                         bucket_frequency = 480)
+                                         
+#--------------------------------- Lining Up Events --------------------------------------------                                         
+lue_480_vb = generate_data(starting_month = starting_months[6], 
+                                         frequency=1,
+                                         frequency_unit = "weeks", 
+                                         asyncData = F,
+                                         volumeBucket = T,
+                                         dermanFramework = F,
+                                         bucket_frequency = 480)
+                                         
+final_lue_480_vb = lue_480_vb$volume_bucket_returns 
+
+```
 
 
