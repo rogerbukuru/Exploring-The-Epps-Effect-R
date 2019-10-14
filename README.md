@@ -9,6 +9,8 @@ The code serves to encapsulate two main distinct areas within the project. The t
 
 ## Monte Carlo Simulations
 
+This is all 
+
 
 ## TAQ Data Engineering and Data Science
 
