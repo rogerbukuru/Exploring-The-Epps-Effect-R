@@ -33,7 +33,7 @@ Before one can be able to implement any of the examples one first has to downloa
 - Data should be stored one level outside of this directory(once cloned), in the following exact directory pattern 'Raw Data Store/Intraday'.
 
 
-**Below we show example usages of how to create aggregated data, however in the folder Aggregated Data Examples, there ready to use scripts that implement fully composed examples for both Calendar Time and Intrinsic Time**
+**Below we show example usages of how to create aggregated data, however in the folder Aggregated Data Examples, there ready to use scripts that implement fully composed examples for both Calendar Time and Intrinsic Time, the scripts create aggregted data, run the estimators and finally plot correlation heatmaps for both the estimators**
 
 
 ### Generating Calendar Time Aggregated TAQ Data Example Usage
