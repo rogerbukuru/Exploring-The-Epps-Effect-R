@@ -26,7 +26,15 @@ and within the Intrinsic time framework the following formats of aggregated TAQ 
 
 The is no limitations to the sampling intervals i.e it could be 1 minute, 10 minutes, 1 hour, 1 day, 1 week etc.
 
+### Data Setup and Directory
+
+Before one can be able to implement any of the examples one first has to download and load the intraday data used for this project, the data can be downloaded from ... Once the data has been downloaded it should follow the following hierachical strucure for ease of use.
+
+- Data should be stored one level outside of this directory(once cloned), in the following exact directory pattern 'Raw Data Store/Intraday'.
+
+
 **Below we show example usages of how to create aggregated data, however in the folder Aggregated Data Examples, there ready to use scripts that implement fully composed examples for both Calendar Time and Intrinsic Time**
+
 
 ### Generating Calendar Time Aggregated TAQ Data Example Usage
 
