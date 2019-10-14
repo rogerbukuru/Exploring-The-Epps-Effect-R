@@ -8,7 +8,7 @@
 # Last houe of a month sample
 # Frequency units includes day, week or hour
 
-get_estimated_correlations = function(asset_data, frequency=1, frequency_unit="day", select_period=FALSE){
+get_estimated_correlations = function(asset_data, FileName,frequency=1, frequency_unit="day", select_period=FALSE){
   
   period_data = asset_data
   if(select_period){
@@ -23,6 +23,6 @@ get_estimated_correlations = function(asset_data, frequency=1, frequency_unit="d
   MMData = ftcorr(p,t,"ComplexExpFejer",F)
   HYData = ftcorr(p,t,"HY",F)
   result = list(MMData,HYData)
-  saveRDS(result,"HYMMData.RData")
+  saveRDS(result,paste0("Trade Data Heatmaps/", FileName, ".RData"))
   return(result)
 }
