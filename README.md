@@ -64,6 +64,10 @@ vwap_1Min = vwap_1Min$bar_data
 
 ```{.r}
 
+source("TradeDataMain.R")
+tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
+init_env(tickers)
+
 #--------------------------------- Derman Framework --------------------------------------------
 derman_480_vb = generate_data(starting_month = starting_months[6], 
                                          frequency=1,
