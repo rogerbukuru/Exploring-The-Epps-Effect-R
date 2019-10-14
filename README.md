@@ -91,6 +91,8 @@ final_lue_480_vb = lue_480_vb$volume_bucket_returns
 
 ```
 
+**Note the script file ExampleDataSets.R has many more examples on how to create data sets of many more sampling intervals**
+
 ### Running Estimators on Aggregated Data
 
 ```{.r}
