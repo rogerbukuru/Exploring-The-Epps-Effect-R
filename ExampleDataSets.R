@@ -1,5 +1,4 @@
 source("TradeDataMain.R")
-source("DataEstimatedCorrelations.R")
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
 init_env(tickers)
 
@@ -38,15 +37,7 @@ closing_1Hour = generate_data(starting_month = starting_months[6],
 closing_1Hour = closing_1Hour$bar_data
 
 #----------------------------------------------------------------------------------------------------------------
-# Computing the Correlations
-# 1 min Closing
-get_estimated_correlations(closing_1Min, "SynchronousDataHYMM1")
 
-# 10 min Closing
-get_estimated_correlations(closing_10Min, "SynchronousDataHYMM2")
-
-# 1 HR Closing
-get_estimated_correlations(closing_1Hour, "SynchronousDataHYMM3")
 
 #-------------------------------------------------------VWAP Bar Data--------------------------------------------
 
@@ -123,3 +114,5 @@ lue_480_volume_bucket = generate_data(starting_month = starting_months[6],
                                          bucket_frequency = 480)
 
 final_lue_480_volume_bucket  = lue_480_volume_bucket$volume_bucket_returns
+
+
