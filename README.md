@@ -26,6 +26,8 @@ and within the Intrinsic time framework the following formats of aggregated TAQ 
 
 The is no limitations to the sampling intervals i.e it could be 1 minute, 10 minutes, 1 hour, 1 day, 1 week etc.
 
+**Below we show example usages of how to create aggregated data, however in the folder Aggregated Data Examples, there ready to use scripts that implement fully composed examples for both Calendar Time and Intrinsic Time**
+
 ### Generating Calendar Time Aggregated TAQ Data Example Usage
 
 ```{.r}
@@ -92,6 +94,7 @@ final_lue_480_vb = lue_480_vb$volume_bucket_returns
 ```
 
 **Note the script file ExampleDataSets.R has more examples on how to create data sets for many more sampling intervals**
+
 
 ### Running Estimators on Aggregated Data
 
