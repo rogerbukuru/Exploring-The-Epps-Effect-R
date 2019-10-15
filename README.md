@@ -18,7 +18,25 @@ The results in here are all simulated stochastic differential equations and they
 - Garch Anderson
 - Garch Reno
 
-To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Simulation Algorithms** directory and one should be able to recover the results as per the report.
+To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Simulation Algorithms** directory and one should be able to recover the results as per the report. 
+
+At the heart of the project is one being able to implement the estimators of various forms of data. Irrespective of whether the data is simulated or real financial data once the data is ready it is split into two matrices, namely the price matrix and the time matrix therefater the estimators are implemented. Using dummy data, below we illustrate a simple usage case.
+
+
+### Estimators Example Usage 
+
+```{.r}
+
+source("ftcorr-RealData.R")
+source("ftcorr-MultiAsset.R")
+
+t = matrix(c(1, NaN, 5, NaN, NaN, 15, 2, NaN, NaN, 10, 12, 20),6, 2)
+p = matrix(c(10, NaN, 9, NaN, NaN, 7, 2, NaN, NaN, 9, 8, 10),6, 2)
+
+MMEstimator = ftcorr(p,t,"ComplexExpFejer",F) # Mallivan-Mancino estimator 
+HYEstimator = ftcorr(p,t,"HY",F) # Hyashi-Yoshida estimator
+
+```
 
 
 ## TAQ Data Engineering and Data Science
