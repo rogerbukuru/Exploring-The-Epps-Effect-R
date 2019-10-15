@@ -9,7 +9,16 @@ The code serves to encapsulate two main distinct areas within the project. The t
 
 ## Monte Carlo Simulations
 
-This is all 
+The results in here are all simulated stochastic differential equations and they include the following: 
+
+- Geometric Brownian Motion
+- Merton Model
+- Ornstein Uhlenbeck
+- Variance Gamma
+- Garch Anderson
+- Garch Reno
+
+To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Simulation Algorithms** directory and one should be able to recover the results as per the report.
 
 
 ## TAQ Data Engineering and Data Science
