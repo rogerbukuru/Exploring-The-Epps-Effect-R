@@ -1,4 +1,4 @@
-# An Exercise in R: High Frequency Covariance estimation using Mallivan-Mancino and Hyashi-Yoshida estimators
+# An Exercise in R: High Frequency Covariance estimation using Malliavin-Mancino and Hayashi-Yoshida estimators
 A group research project completed by Patrick Chang and Roger Bukuru and supervised by Professor Tim Gebbie, submitted in fulfilment of the requirements for the degree of Bachelor of Science Honours Specialising in Statistical Sciences in the Department of Statistical Sciences at the University of Cape Town.
 
 The code serves to encapsulate two main distinct areas within the project. The two areas involves the following
@@ -15,20 +15,41 @@ The results in here are all simulated stochastic differential equations and they
 - Merton Model
 - Ornstein Uhlenbeck
 - Variance Gamma
-- Garch Anderson
-- Garch Reno
+- GARCH(1.1) Anderson
+- GARCH(1.1) Reno
 
-To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Simulation Algorithms** directory and one should be able to recover the results as per the report. 
+To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Plots** directory and one should be able to recover the results as per the report. 
 
-At the heart of the project is one being able to implement the estimators of various forms of data. Irrespective of whether the data is simulated or real financial data once the data is ready it is split into two matrices, namely the price matrix and the time matrix therefater the estimators are implemented. Using dummy data, below we illustrate a simple usage case.
+The simulation algorithms are designed to simulate multivariate price paths for the various SDEs. However, the GARCH algorithms can only simulate bivariate price paths. Below we illustrate a simple use case.
+
+### Simulating Data
+
+```{.r}
+
+source("GBM.R")
+
+n = 500
+mu = c(0.01/86400, 0.01/86400)
+s1 = 0.1/86400
+s2 = 0.2/86400
+sigma = matrix(c(s1, sqrt(s1*s2)*0.35,
+                 sqrt(s1*s2)*0.35, s2), 2, 2)
+startprice = c(100, 100)
+
+GBM_Price = BM(n, mu, sigma, startprice, 1)
+
+```
+
+The function **ftcorr** from the script file **ftcorr.R** is used for bivariate asset **prices**. The function **ftcorr** from the script file **ftcorr-MultiAsset.R** is used for multivariate asset **returns** and the MM estimates are computed based on the highest available sampling frequency present in the data. The function **ftcorrReno** from the script file **ftcorr-Reno.R** is used for bivariate asset **prices** but it allows the user to specify **M** - the number of Fourier coefficients used in the computation of the MM estimate.
+
+At the heart of the project is one being able to implement the estimators of various forms of data. Irrespective of whether the data is simulated or real financial data once the data is ready it is split into two matrices, namely the price matrix and the time matrix thereafter the estimators are implemented. Using dummy data, below we illustrate a simple usage case.
 
 
 ### Estimators Example Usage 
 
 ```{.r}
 
-source("ftcorr-RealData.R")
-source("ftcorr-MultiAsset.R")
+source("ftcorr.R")
 
 t = matrix(c(1, NaN, 5, NaN, NaN, 15, 2, NaN, NaN, 10, 12, 20),6, 2)
 p = matrix(c(10, NaN, 9, NaN, NaN, 7, 2, NaN, NaN, 9, 8, 10),6, 2)
