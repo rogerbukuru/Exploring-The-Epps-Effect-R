@@ -1,13 +1,13 @@
 ## Author: Patrick Chang
 # Scipt file to recover the plot for 
-# "Effect of Volatility and Price Clustering"
+# "Effect of Volatility and Mean Reversion"
 
 #---------------------------------------------------------------------------
 
 library(ggplot2)
 library(latex2exp)
 library(svMisc)
-source("ftcorr.R")
+source("Estimators/ftcorr.R")
 source("Monte Carlo Simulation Algorithms/Simulations.R")
 
 #---------------------------------------------------------------------------

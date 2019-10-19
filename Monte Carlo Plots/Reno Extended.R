@@ -7,7 +7,7 @@
 library(ggplot2)
 library(latex2exp)
 library(svMisc)
-source("ftcorr-Reno.R")
+source("Estimators/ftcorr-Reno.R")
 source("Monte Carlo Simulation Algorithms/Simulations.R")
 
 #--------------------------------------------------------------------------
