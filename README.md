@@ -15,8 +15,8 @@ The results in here are all simulated stochastic differential equations and they
 - Merton Model
 - Ornstein Uhlenbeck
 - Variance Gamma
-- GARCH(1.1) Anderson
-- GARCH(1.1) Reno
+- GARCH(1,1) Anderson
+- GARCH(1,1) Reno
 
 To obtain any of the following simulated results, simply run the appropriate script that can be found in the **Monte Carlo Plots** directory and one should be able to recover the results as per the report. 
 
