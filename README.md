@@ -1,4 +1,5 @@
-# An Exercise in R: High Frequency Covariance estimation using Malliavin-Mancino and Hayashi-Yoshida estimators
+# Exploring the Epps Effect in South African Markets: An exercise in R
+
 A group research project completed by Patrick Chang and Roger Bukuru and supervised by Professor Tim Gebbie, submitted in fulfilment of the requirements for the degree of Bachelor of Science Honours Specialising in Statistical Sciences in the Department of Statistical Sciences at the University of Cape Town.
 
 The code serves to encapsulate two main distinct areas within the project. The two areas involves the following
