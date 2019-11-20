@@ -95,6 +95,14 @@ derman_480_volume_bucket = generate_data(starting_month = starting_months[6],
 
 #------------------------------------------------------- Lining Up Framework------------------------------------
 
+lue_8_volume_bucket = generate_data(starting_month = starting_months[6], 
+                                     frequency=1,
+                                     frequency_unit = "weeks", 
+                                     asyncData = F,
+                                     volumeBucket = T,
+                                     dermanFramework = F,
+                                     bucket_frequency = 8)
+
 lue_48_volume_bucket = generate_data(starting_month = starting_months[6], 
                                       frequency=1,
                                       frequency_unit = "weeks", 

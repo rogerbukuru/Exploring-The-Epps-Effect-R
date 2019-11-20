@@ -196,27 +196,27 @@ create_volume_bucket_lining_up_events = function(tickers,bucket_freq,stock_price
   volume_buckets = as.data.frame(volume_buckets)
   volume_buckets$Date = as.POSIXct(volume_buckets[,"Date"],origin="1970-01-01",tz="UTC")
 
-  stock_returns = lapply(tickers, function(ticker){
-   ticker_data = data.frame(
-     times=volume_buckets[,"Date"],
-     value=volume_buckets[,ticker])
-   colnames(ticker_data) = c("times", "value")
-   num_obs = nrow(ticker_data)
-   non_na_indexes = which(!is.na(ticker_data[,"value"]))
-   non_na_indexes[1] = 1
-   ticker_data = na.omit(ticker_data)
-   ticker_data = ticker_data%>%convert_prices_to_returns()
-   final_ticker_data = data.frame(ticker=rep(NaN,num_obs))
-   colnames(final_ticker_data) = ticker
-   final_ticker_data[non_na_indexes,ticker] = ticker_data[,"stock_returns"]
-   return(final_ticker_data)
- })
- final_volume_buckets = do.call("cbind",stock_returns)
- na_only_rows = which(rowSums(is.na(final_volume_buckets))==length(tickers)) # NA on all columns
- final_volume_buckets = final_volume_buckets[-na_only_rows,] # remove NA's
- volume_ticks = 1:nrow(final_volume_buckets)
- final_volume_buckets = cbind(volume_ticks,final_volume_buckets)
+ #  stock_returns = lapply(tickers, function(ticker){
+ #   ticker_data = data.frame(
+ #     times=volume_buckets[,"Date"],
+ #     value=volume_buckets[,ticker])
+ #   colnames(ticker_data) = c("times", "value")
+ #   num_obs = nrow(ticker_data)
+ #   non_na_indexes = which(!is.na(ticker_data[,"value"]))
+ #   non_na_indexes[1] = 1
+ #   ticker_data = na.omit(ticker_data)
+ #   ticker_data = ticker_data%>%convert_prices_to_returns()
+ #   final_ticker_data = data.frame(ticker=rep(NaN,num_obs))
+ #   colnames(final_ticker_data) = ticker
+ #   final_ticker_data[non_na_indexes,ticker] = ticker_data[,"stock_returns"]
+ #   return(final_ticker_data)
+ # })
+ # final_volume_buckets = do.call("cbind",stock_returns)
+ # na_only_rows = which(rowSums(is.na(final_volume_buckets))==length(tickers)) # NA on all columns
+ # final_volume_buckets = final_volume_buckets[-na_only_rows,] # remove NA's
+ # volume_ticks = 1:nrow(final_volume_buckets)
+ # final_volume_buckets = cbind(volume_ticks,final_volume_buckets)
  print("completed to create buckets...")
- data = list(volume_bucket_prices=volume_buckets , volume_bucket_returns = final_volume_buckets)
+ data = list(volume_bucket_prices=volume_buckets)# , volume_bucket_returns = final_volume_buckets)
  return(data)
 }
