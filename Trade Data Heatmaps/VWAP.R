@@ -26,6 +26,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -33,7 +34,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(a) MM 1 HR VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.3172"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.3172 \\pm 0.2192"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -55,6 +56,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -62,7 +64,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(b) MM 10 Min VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.256"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.256 \\pm 0.2221"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -84,6 +86,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -91,7 +94,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(c) MM 1 Min VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1269"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.1269 \\pm 0.1071"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -114,6 +117,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -121,7 +125,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(e) HY 1 HR VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.3201"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.3201 \\pm 0.2365"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -143,6 +147,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -150,7 +155,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(f) HY 10 Min VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2441"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2441 \\pm 0.227"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -172,6 +177,7 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
@@ -179,7 +185,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
   labs(title = "(g) HY 1 Min VWAP")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.145"), size = 6) + 
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.145 \\pm 0.1185"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),

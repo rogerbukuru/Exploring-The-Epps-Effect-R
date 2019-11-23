@@ -25,14 +25,15 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(a) MM 48")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0073"), size = 6) + 
+  labs(title = "(b) MM 48")+
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0073 \\pm 0.0196"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -54,14 +55,15 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(b) MM 480")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0046"), size = 6) + 
+  labs(title = "(c) MM 480")+
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0046 \\pm 0.0068"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -85,14 +87,15 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(c) HY 48")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.4265"), size = 6) + 
+  labs(title = "(e) HY 48")+
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.4265 \\pm 0.2773"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
@@ -114,14 +117,15 @@ rownames(stock_correlations) = tickers
 melted_corr = melt(stock_correlations)
 color <- colorRampPalette(c('red','orange',"yellow",'springgreen', 'royalblue'))(sqrt(NROW((melted_corr))))%>%rev()
 round(mean(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
+round(sd(abs(stock_correlations[lower.tri(stock_correlations)])), 4)
 
 
 ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(d) HY 480")+
-  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2996"), size = 6) + 
+  labs(title = "(f) HY 480")+
+  annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2996 \\pm 0.2343"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
         legend.title = element_text(size = 13, face = "bold"),
