@@ -20,9 +20,10 @@ get_estimated_correlations = function(asset_data, FileName,frequency=1, frequenc
   hy_mm_data = HYMMDataSets(period_data, tickers,start_date,end_date)
   p = hy_mm_data$p
   t = hy_mm_data$t
+
   MMData = ftcorr(p,t,"ComplexExpFejer",F)
   HYData = ftcorr(p,t,"HY",F)
   result = list(MMData,HYData)
-  saveRDS(result,paste0("Trade Data Heatmaps/", FileName, ".RData"))
+  saveRDS(result,paste0(FileName, ".RData"))
   return(result)
 }

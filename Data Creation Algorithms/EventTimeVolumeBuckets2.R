@@ -1,7 +1,7 @@
 # Author: Roger Bukuru
 # Date: 25 August 2019 12:30:00
 # Implementation of the Lining Up Events to create event time volume buckets
-# with the most liquid ticker
+# with the least liquid ticker
 
 
 expand_volume_over_price = function(stock_data,ticker_name){ 
@@ -157,7 +157,7 @@ create_volume_bucket_lining_up_events = function(tickers,bucket_freq,stock_price
   avg_daily_trades_per_ticker = avg_daily_trades_per_ticker/number_of_days
   print(avg_daily_trades_per_ticker)
   
-  index_max = which(avg_daily_trades_per_ticker==max(avg_daily_trades_per_ticker))
+  index_max = which(avg_daily_trades_per_ticker==min(avg_daily_trades_per_ticker))
   most_liquid_ticker = tickers[index_max]
   volume_bucket_size = as.numeric(floor(avg_daily_trades_per_ticker[index_max]/bucket_freq))
   #volume_bucket_size = 500
@@ -194,7 +194,7 @@ create_volume_bucket_lining_up_events = function(tickers,bucket_freq,stock_price
   volume_buckets = as.data.frame(volume_buckets)
   volume_buckets$Date = as.POSIXct(volume_buckets[,"Date"],origin="1970-01-01",tz="UTC")
   
-  stock_returns = lapply(tickers, function(ticker){
+   stock_returns = lapply(tickers, function(ticker){
     ticker_data = data.frame(
       times=volume_buckets[,"Date"],
       value=volume_buckets[,ticker])

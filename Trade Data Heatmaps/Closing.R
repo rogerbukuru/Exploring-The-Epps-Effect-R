@@ -8,13 +8,13 @@ library(reshape2)
 library("RColorBrewer")
 library(latex2exp)
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
-Onemin = readRDS("SynchronousDataHYMM1.RData")
+Onemin = readRDS("Computed Correlation/SynchronousDataHYMM1.RData")
 MM1MinSyncClose = Onemin[[1]]
 HY1MinSyncClose = Onemin[[2]]
-TenMin = readRDS("SynchronousDataHYMM2.RData")
+TenMin = readRDS("Computed Correlation/SynchronousDataHYMM2.RData")
 MM10MinSyncClose = TenMin[[1]]
 HY10MinSyncClose = TenMin[[2]]
-OneHour = readRDS("SynchronousDataHYMM3.RData")
+OneHour = readRDS("Computed Correlation/SynchronousDataHYMM3.RData")
 MM1HourSyncClose = OneHour[[1]]
 HY1HourSyncClose = OneHour[[2]]
 

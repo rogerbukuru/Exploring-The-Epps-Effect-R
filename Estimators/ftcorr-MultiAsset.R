@@ -50,6 +50,8 @@ ftcorr = function(price, time, fourierMethod, onlyOverlapping){
   Sigma = matrix(NA, mp, mp)
   Sigma_rescaled = matrix(NA, mp, mp)
   for (i in 1:(mp-1)) {
+    percentage = round(i/(mp-1) * 100, 2)
+    print(paste(percentage, "% of", fourierMethod))
     for(j in (i+1):mp) {
       p = price[,c(i,j)]
       t = time[,c(i,j)]

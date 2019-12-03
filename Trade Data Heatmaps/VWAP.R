@@ -7,13 +7,13 @@
 library(reshape2)
 library("RColorBrewer")
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
-Onemin = readRDS("SynchronousDataHYMMVWAP1.RData")
+Onemin = readRDS("Computed Correlation/SynchronousDataHYMMVWAP1.RData")
 MM1MinSyncVWAP = Onemin[[1]]
 HY1MinSyncVWAP = Onemin[[2]]
-TenMin = readRDS("SynchronousDataHYMMVWAP2.RData")
+TenMin = readRDS("Computed Correlation/SynchronousDataHYMMVWAP2.RData")
 MM10MinSyncVWAP = TenMin[[1]]
 HY10MinSyncVWAP = TenMin[[2]]
-OneHour = readRDS("SynchronousDataHYMMVWAP3.RData")
+OneHour = readRDS("Computed Correlation/SynchronousDataHYMMVWAP3.RData")
 MM1HourSyncVWAP = OneHour[[1]]
 HY1HourSyncVWAP = OneHour[[2]]
 

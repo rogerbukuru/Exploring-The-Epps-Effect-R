@@ -8,13 +8,13 @@ library(reshape2)
 library("RColorBrewer")
 library(latex2exp)
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
-volumeBucket8 = readRDS("MMHYDermanBucket8.RData")
+volumeBucket8 = readRDS("Computed Correlation/MMHYDermanBucket8.RData")
 MMBucket8 = volumeBucket8[[1]]
 HYBucket8 = volumeBucket8[[2]]
-volumeBucket48 = readRDS("MMHYDermanBucket48.RData")
+volumeBucket48 = readRDS("Computed Correlation/MMHYDermanBucket48.RData")
 MMBucket48 = volumeBucket48[[1]]
 HYBucket48 = volumeBucket48[[2]]
-volumeBucket480 = readRDS("MMHYDermanBucket480.RData")
+volumeBucket480 = readRDS("Computed Correlation/MMHYDermanBucket480.RData")
 MMBucket480 = volumeBucket480[[1]]
 HYBucket480 = volumeBucket480[[2]]
 

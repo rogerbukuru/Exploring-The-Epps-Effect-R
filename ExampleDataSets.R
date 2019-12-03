@@ -94,6 +94,7 @@ derman_480_volume_bucket = generate_data(starting_month = starting_months[6],
                                          bucket_frequency = 480)
 
 #------------------------------------------------------- Lining Up Framework------------------------------------
+source("HY_MM_DataFormatVB.R")
 
 lue_8_volume_bucket = generate_data(starting_month = starting_months[6], 
                                      frequency=1,

@@ -69,8 +69,7 @@ ftcorr_supp = function(p, t, fourierMethod, onlyOverlapping) {
   }
   
   # compute the average minimum time change
-  dtau = cbind(diff(tau[,1]), diff(tau[,2]))
-  dtau[dtau==0] = NaN
+  dtau = c(diff(tau[!is.na(tau[,1]), 1]), diff(tau[!is.na(tau[,2]), 2]))
   
   taumin = min(dtau, na.rm = TRUE)
   taumax = 2* pi

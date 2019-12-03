@@ -12,7 +12,7 @@ library("RColorBrewer")
 tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
 
 # MM
-MM1WeekAsync = readRDS("AsyncMMWeek.RData")
+MM1WeekAsync = readRDS("Computed Correlation/AsyncMMWeek.RData")
 
 stock_correlations = MM1WeekAsync$Correlation
 colnames(stock_correlations) = tickers
@@ -43,7 +43,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
         plot.title = element_text(face="bold", colour="black", size=15,hjust=0.5,vjust=0))+coord_fixed()
 
 # HY
-HY1WeekAsync = readRDS("AsyncHYWeek.RData")
+HY1WeekAsync = readRDS("Computed Correlation/AsyncHYWeek.RData")
 
 stock_correlations = HY1WeekAsync$Correlation
 colnames(stock_correlations) = tickers

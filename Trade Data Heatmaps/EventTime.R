@@ -7,12 +7,12 @@
 library(reshape2)
 library(tidyverse)
 library("RColorBrewer")
-data = readRDS("MMHYTimBucket48.RData")
+data = readRDS("Computed Correlation/MMHYTimBucket48.RData")
 
-tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR") 
+tickers = c("BTI","NPN","AGL","MNP","SOL","SBK","NED","ABG","SHP","FSR*") 
 MM48VolumeBuckets = data[[1]]
 HY48VolumeBuckets = data[[2]] 
-data = readRDS("MMHYTimBucket480.RData")
+data = readRDS("Computed Correlation/MMHYTimBucket480.RData")
 MM480VolumeBuckets = data[[1]]
 HY480VolumeBuckets = data[[2]]
 
@@ -32,7 +32,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(b) MM 48")+
+  labs(title = "(a) MM 48 Most Liquid")+
   annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0073 \\pm 0.0196"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
@@ -62,7 +62,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(c) MM 480")+
+  labs(title = "(b) MM 480 Most Liquid")+
   annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.0046 \\pm 0.0068"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
@@ -94,7 +94,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(e) HY 48")+
+  labs(title = "(c) HY 48 Most Liquid")+
   annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.4265 \\pm 0.2773"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
@@ -124,7 +124,7 @@ ggplot(data = melted_corr, aes(Var1,Var2 , fill = value))+
   geom_tile()+
   scale_fill_gradientn(colours = color,limit=c(-1,max(stock_correlations)),name=TeX("$\\rho$")) +
   theme_bw()+ 
-  labs(title = "(f) HY 480")+
+  labs(title = "(d) HY 480 Most Liquid")+
   annotate("text", x = 7, y = 3, label = TeX("$\\bar{| \\rho_{ij} | } = 0.2996 \\pm 0.2343"), size = 6) + 
   theme(legend.key.size = unit(1.7, "cm"),
         legend.key.width = unit(0.5,"cm"),
