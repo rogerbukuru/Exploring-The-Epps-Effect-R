@@ -71,7 +71,8 @@ ftcorr = function(p, t, fourierMethod, onlyOverlapping) {
   # compute the number of Fourier coefficients
   N0 = max(taumax / taumin)
   # use Nyquist and compute the wavenumber range for each stock
-  k = matrix(1:round(2*N0), 1, length(1:round(2*N0)))  # minimum k range
+  k = matrix(1:floor(N0/2), 1, length(1:floor(N0/2)))  # minimum k range
+  N = length(k)
   
   # --------------------------------------------------------------------------------
   
@@ -114,12 +115,18 @@ ftcorr = function(p, t, fourierMethod, onlyOverlapping) {
                    # and covalatility over the entire time window 
                    # Fourier-Fejer formulae
                    Sigma = (pi^2 / (2*N0)) * (fca %*% t(fca) + fcb %*% t(fcb))
+                   #Sigma = matrix(0, 2, 2)
+                   #Sigma[1,1] = (pi^2 / (2*N0)) * sum(fca[1,]*fca[1,] + fcb[1,]*fca[1,])
+                   #Sigma[2,2] = (pi^2 / (2*N0)) * sum(fca[2,]*fca[2,] + fcb[2,]*fca[2,])
+                   #Sigma[1,2] = (pi^2 / (2*N0)) * sum(fca[1,]*fca[2,] + fcb[1,]*fca[2,])
+                   #Sigma[2,1] = Sigma[1,2]
                    Sigma
                    
                  },
                  "ComplexExpFejer" = {
-                   e_t_dp.PosComplexExpDiffPrice = matrix(0, mp, length(k))
-                   e_t_dp.NegComplexExpDiffPrice = matrix(0, mp, length(k))
+                   e_t_dp.PosComplexExpDiffPrice = matrix(0, mp, N)
+                   e_t_dp.NegComplexExpDiffPrice = matrix(0, mp, N)
+                   C0 = matrix(0, mp, 1)
                    
                    for (i in 1:mp) {
                      # nonuniformly sampled data from sparse matrix
@@ -143,17 +150,27 @@ ftcorr = function(p, t, fourierMethod, onlyOverlapping) {
                      # create complex exponential coefficients, multiply with
                      # log-price differences
                      
-                     e_t_dp.PosComplexExpDiffPrice[i, ] = ComplexExp(DiffP, Time[2:end, ], K)
-                     e_t_dp.NegComplexExpDiffPrice[i, ] = ComplexExp(DiffP, -Time[2:end, ], K)
+                     C0[i] = sum(DiffP)
+                     C = ComplexExp(DiffP, -Time[1:(end-1), ], K)
+                     
+                     e_t_dp.PosComplexExpDiffPrice[i, ] = Conj(C)
+                     e_t_dp.NegComplexExpDiffPrice[i, ] = C
                    }
+                   
+                   c_pos = matrix(0, mp, 2*N+1)
+                   c_neg = matrix(0, mp, 2*N+1)
+                   
+                   c_pos[1,] = c(e_t_dp.NegComplexExpDiffPrice[1,], C0[1], e_t_dp.PosComplexExpDiffPrice[1,])
+                   c_pos[2,] = c(e_t_dp.NegComplexExpDiffPrice[2,], C0[2], e_t_dp.PosComplexExpDiffPrice[2,])
+                   c_neg[1,] = c(e_t_dp.PosComplexExpDiffPrice[1,], C0[1], e_t_dp.NegComplexExpDiffPrice[1,])
+                   c_neg[2,] = c(e_t_dp.PosComplexExpDiffPrice[2,], C0[2], e_t_dp.NegComplexExpDiffPrice[2,])
+                   
+                   
                    Sigma = matrix(NA, mp, mp)
-                   Sigma[1, 1] = 1 / (2*N0) * (sum(e_t_dp.PosComplexExpDiffPrice[1, ]
-                                                   * e_t_dp.NegComplexExpDiffPrice[1, ]))
-                   Sigma[1, 2] = 1 / (2*N0) * (sum(e_t_dp.PosComplexExpDiffPrice[1, ]
-                                                   * e_t_dp.NegComplexExpDiffPrice[2, ]))
+                   Sigma[1, 1] = 1 / (2*N+1) * (sum(c_pos[1, ] * c_neg[1, ]))
+                   Sigma[1, 2] = 1 / (2*N+1) * (sum(c_pos[1, ] * c_neg[2, ]))
                    Sigma[2, 1] = Sigma[1, 2]
-                   Sigma[2, 2] = 1 / (2*N0) * (sum(e_t_dp.PosComplexExpDiffPrice[2, ] 
-                                                   * e_t_dp.NegComplexExpDiffPrice[2, ]))
+                   Sigma[2, 2] = 1 / (2*N+1) * (sum(c_pos[2, ] * c_neg[2, ]))
                    Sigma
                  },
                  "HY" = {
